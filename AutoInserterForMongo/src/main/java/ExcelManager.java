@@ -1,7 +1,9 @@
 import com.mongodb.Mongo;
 import com.mongodb.util.Hash;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
@@ -19,7 +21,7 @@ import java.util.List;
  */
 public class ExcelManager {
     private File file;
-    private XSSFWorkbook excelFile;
+    private Workbook excelFile;
     private MongoManager mongoManager;
     private List<String> attributes;
     private List<String> values;
@@ -33,11 +35,14 @@ public class ExcelManager {
 
         try {
             file = new File(src);
-            excelFile = new XSSFWorkbook(new FileInputStream(file));
+            if (src.endsWith(".xls")) excelFile = new HSSFWorkbook(new FileInputStream(file));
+            else excelFile = new XSSFWorkbook(new FileInputStream(file));
         } catch (FileNotFoundException e) {
             GUIFrame.log("FILE NOT FOUND :: Please check xls, xlsx file path and retry");
         } catch (IOException e) {
             GUIFrame.log("ERROR HAS OCCURRED :: Please retry");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 

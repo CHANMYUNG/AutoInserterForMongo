@@ -26,6 +26,8 @@ public class MongoManager {
         try {
             mongoClient = new MongoClient(new ServerAddress("localhost", port));
         } catch (UnknownHostException e) {
+            System.out.println("Could not create new MongoClient");
+            e.printStackTrace();
             GUIFrame.errorOccurred();
             return;
         }
@@ -54,6 +56,8 @@ public class MongoManager {
                 collection.save(object);
             }
         } catch (Exception e) {
+            System.out.println("Insertion ERROR");
+            e.printStackTrace();
             GUIFrame.errorOccurred();
             return;
         }
