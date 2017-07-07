@@ -50,7 +50,7 @@ public class MongoManager {
             BasicDBObject object = new BasicDBObject();
             for (int i = 0; i < attributes.size(); i++) {
                 if (definedAttributes.get(attributes.get(i)).equals("Number"))
-                    object.append(attributes.get(i), Integer.parseInt(values.get(i).substring(0, values.get(i).length() - 2)));
+                    object.append(attributes.get(i), Integer.parseInt(values.get(i)));
                 else
                     object.append(attributes.get(i), values.get(i));
                 collection.save(object);
