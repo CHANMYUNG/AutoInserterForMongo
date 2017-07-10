@@ -34,6 +34,7 @@ public class MongoManager {
         System.out.println(mongoClient.getAddress());
         db = mongoClient.getDB(dbName);
         collection = db.getCollection(col);
+        collection.drop();
     }
 
     public void setAttributes(List<String> attributes) {
